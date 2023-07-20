@@ -56,7 +56,7 @@ const comprarEntradas = (listaObrasOrdenada)=>{
     const total = calcularTotal (subTotal.subtotalPrecio, costoServicio, descuentos)
 
     
-    alert(`Gracias por elegir Teatro Animal 🐯. Compraste ${subTotal.totalCantidad} entradas, y el total es $${total}`)
+    alert(`Gracias por elegir Animal Teatro🐯\nCompraste ${subTotal.totalCantidad} entradas, y el total es $${total}`)
 
     console.log(costoServicio)
     console.log (descuentos)
@@ -124,3 +124,46 @@ const calcularTotal = (subtotalPrecio, costoServicio, descuentos) => {
 }
   
 ordenarPorDia ()
+
+const confirmarEntradas = confirm("¿Desea recibir sus e-tickets al mail?");
+
+const entradasFisicaDigital = (confirmarEntradas) => {
+  if (!confirmarEntradas) {
+    alert("Puede imprimirlas desde esta página, o acercarse con su DNI a boletería el día de la función");
+  } else {
+    alert("Enviaremos sus entradas al mail");
+  }
+}
+
+const enviarAlMail = () => {
+  if (!confirmarEntradas) {
+    alert("Ahora sí \n¡Muchas gracias por tu compra! \nGracias por elegir a Animal Teatro 🐯")
+    return
+  }
+
+  let emailsValidos = []
+  let preguntarDeNuevo = true
+
+  do {
+    const email = prompt("Ingrese su email: ")
+    const confirmarEmail = prompt("Confirme su email: ")
+
+    if (email === confirmarEmail) {
+      emailsValidos.push(email)
+      preguntarDeNuevo = false
+    } else {
+      alert("El email es incorrecto, vuelva a ingresarlo")
+    }
+  } while (preguntarDeNuevo)
+
+  return emailsValidos
+};
+
+const emailsEnviados = enviarAlMail()
+
+if (confirmarEntradas && emailsEnviados.length > 0) {
+  emailsEnviados.forEach((email) => {
+    alert(`Hemos enviado su e-ticket al correo ${email}`)
+  });
+  alert("Ahora sí \n¡Muchas gracias por tu compra! \nGracias por elegir a Animal Teatro 🐯")
+}
